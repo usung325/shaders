@@ -4,7 +4,7 @@ import Model from '@/components/Model'
 
 export default function Scene() {
     return (
-        <Canvas camera={{fov:50}}>
+        <Canvas camera={{fov:100}}>
             <Model />
         </Canvas>
     )

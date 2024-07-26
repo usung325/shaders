@@ -2,7 +2,7 @@ import { useControls } from 'leva'
 import React, {useRef} from 'react'
 import { fragment, vertex } from './shader'
 import { useFrame } from '@react-three/fiber'
-import { useTexture } from '@react-three/drei'
+import { useTexture, useAspect } from '@react-three/drei'
 
 
 export default function Model() {
@@ -10,10 +10,17 @@ export default function Model() {
     const plane = useRef();
     const { amplitude, waveLength } = useControls({
         amplitude: { value: 0.25, min: 0, max: 5, stop: 0.05},
-        waveLength: { value: 5, min: 0, max: 20, stop: 1}
+        waveLength: { value: 5, min: 0, max: 50, stop: 1}
     })
 
-    const texture = useTexture("/images/im1.png")
+    const texture = useTexture("/images/im2.png")
+    const {width, height} = texture.image //grabbing width and height from texture.
+
+    const scale = useAspect(
+        width,
+        height,
+        0.7
+    )
 
     const uniforms = useRef ({
         uTime: {value: 0},
@@ -28,8 +35,8 @@ export default function Model() {
         plane.current.material.uniforms.uTime.value += 0.01;
     })
     return (
-        <mesh ref={plane}>
-            <planeGeometry args={[3, 3 / (1736/1976), 64, 64]}/>
+        <mesh ref={plane} scale = {scale}>
+            <planeGeometry args={[1,1, 64, 64]}/>
 
             <shaderMaterial
                 vertexShader = {vertex}

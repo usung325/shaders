@@ -8,8 +8,13 @@ const Scene = dynamic(() => import('@/components/Scene'), {
 
 export default function Home() {
   return (
-    <main className="w-full h-screen">
-      <Scene />
+    <main>
+      <div className="h-[300vh]">
+        <div className = "h-screen sticky top-0">
+          <Scene /> 
+        </div>
+      </div>
+      <div className="h-screen"></div>
     </main>
   )
 }
